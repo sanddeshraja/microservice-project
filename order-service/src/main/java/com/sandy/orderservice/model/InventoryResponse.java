@@ -1,4 +1,4 @@
-package com.sandy.inventoryservice.model;
+package com.sandy.orderservice.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
