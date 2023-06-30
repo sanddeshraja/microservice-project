@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/inventory-service/com.sandy.microservices-new.inventory-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/inventory-service/com.sandy.microservices-new.inventory-service.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/order-service/com.sandy.microservices-new.order-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/order-service/com.sandy.microservices-new.order-service.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/product-service/com.sandy.microservices-new.product-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/product-service/com.sandy.microservices-new.product-service.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/inventory-service/microservices-new.inventory-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/inventory-service/microservices-new.inventory-service.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/order-service/microservices-new.order-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/order-service/microservices-new.order-service.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/product-service/microservices-new.product-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/product-service/microservices-new.product-service.main.iml" />
