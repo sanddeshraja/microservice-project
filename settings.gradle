@@ -3,4 +3,6 @@ include 'product-service'
 include 'inventory-service'
 include 'order-service'
 include 'discovery-server'
+include 'gateway'
+include 'api-gateway'
 
