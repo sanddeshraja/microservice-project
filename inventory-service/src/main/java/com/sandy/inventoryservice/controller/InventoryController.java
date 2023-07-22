@@ -13,7 +13,9 @@ import java.util.List;
 public class InventoryController {
     @Autowired
     InventoryService inventoryService;
-    @GetMapping("/{sku-code}")
+    @GetMapping
+//            ("/{sku-code}")
+
     @ResponseStatus(HttpStatus.OK)
     public List<InventoryResponse> isInStock(@RequestParam List<String> skuCode)
     {

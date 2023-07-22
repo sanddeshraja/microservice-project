@@ -17,10 +17,10 @@ import java.util.UUID;
 public class OrderService {
     @Autowired
     OrderRepository orderRepository;
-    private final WebClient webClient;
+    private final WebClient.Builder webClientBuilder;
 
-    public OrderService(WebClient webClient) {
-        this.webClient = webClient;
+    public OrderService(WebClient.Builder webClientBuilder) {
+        this.webClientBuilder = webClientBuilder;
     }
 
     public void placeOrder(OrderRequest orderRequest){
@@ -30,7 +30,7 @@ public class OrderService {
                 .stream().map(orderLineItemsDto -> mapToOrderLineItems(orderLineItemsDto)).toList();
         order.setOrderLineItemsList(orderLineItems);
         List<String> skuCodes = order.getOrderLineItemsList().stream().map(OrderLineItems -> OrderLineItems.getSkuCode()).toList();
-        InventoryResponse[] inventoryResponses =webClient.get().uri("http://localhost:8082/api/inventory",uriBuilder -> uriBuilder.queryParam("skuCode",skuCodes).build())
+        InventoryResponse[] inventoryResponses =webClientBuilder.build().get().uri("http://inventory-service/api/inventory",uriBuilder -> uriBuilder.queryParam("skuCode",skuCodes).build())
                         .retrieve().bodyToMono(InventoryResponse[].class).block();
         boolean allProdutcsInStock = Arrays.stream(inventoryResponses).allMatch(InventoryResponse::isInStock);
         if(allProdutcsInStock)
