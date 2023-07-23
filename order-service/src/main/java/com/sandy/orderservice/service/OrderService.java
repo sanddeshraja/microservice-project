@@ -1,9 +1,11 @@
 package com.sandy.orderservice.service;
 
+import com.sandy.orderservice.event.OrderPlacedEvent;
 import com.sandy.orderservice.model.*;
 import com.sandy.orderservice.repository.OrderRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -18,9 +20,11 @@ public class OrderService {
     @Autowired
     OrderRepository orderRepository;
     private final WebClient.Builder webClientBuilder;
+    private final KafkaTemplate<String,OrderPlacedEvent> kafkaTemplate;
 
-    public OrderService(WebClient.Builder webClientBuilder) {
+    public OrderService(WebClient.Builder webClientBuilder,KafkaTemplate kafkaTemplate) {
         this.webClientBuilder = webClientBuilder;
+        this.kafkaTemplate=kafkaTemplate;
     }
 
     public String placeOrder(OrderRequest orderRequest){
@@ -35,6 +39,7 @@ public class OrderService {
         boolean allProdutcsInStock = Arrays.stream(inventoryResponses).allMatch(InventoryResponse::isInStock);
         if(allProdutcsInStock) {
             orderRepository.save(order);
+            kafkaTemplate.send("notificationTopic",new OrderPlacedEvent(order.getOrderNo()));
             return "order placed successfully!";
         }
         else

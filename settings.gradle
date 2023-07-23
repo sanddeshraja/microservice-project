@@ -5,4 +5,5 @@ include 'order-service'
 include 'discovery-server'
 include 'gateway'
 include 'api-gateway'
+include 'notification-service'
 
